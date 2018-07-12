@@ -1,0 +1,106 @@
+# day06
+## 생성자(constructor)
+
+>생성자 하나도 만들지 않으면 디폴트 생성자 자동으로 쓰임
+
+Circle.java
+~~~java
+public class Circle {
+	private int radius;
+	private Point center;
+
+	public Circle() {
+		radius =0;
+		center = new Point();
+	}
+
+	public Circle(int radius, Point center) {
+		this.radius = radius;
+//		this.center = center;
+    this.center = new Point(center.getX(),center.getY());
+	}
+
+	public int getRadius() {
+		return radius;
+	}
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+	public Point getCenter() {
+		return center;
+	}
+	public void setCenter(Point center) {
+//		this.center = center;
+//		주소값만 복사한것
+
+		this.center.setX(center.getX());
+		this.center.setY(center.getY());
+//	주소값 안의 실제 값을 복사하는 deep
+	}
+	@Override
+	public String toString() {
+		return "radius: "+ radius+" center: "+ center;
+	}
+
+}
+~~~
+Point.java
+~~~java
+public class Point {
+	private int x;
+	private int y;
+
+	public Point() {
+		x=y=0;
+	}
+
+	public Point (int x, int y) {
+		this.x=x;
+		this.y=y;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	@Override
+	public String toString() {
+		return "Point ["+x+","+y+"]";
+	}
+	}
+  ~~~
+  CircleTest.java
+  ~~~java
+  public class CircleTest {
+	public static void main(String[] args) {
+
+		Point p = new Point(2,3);
+		Circle c = new Circle();
+		c.setRadius(10);
+		c.setCenter(p);
+
+		System.out.println(p);
+		System.out.println(c);
+		System.out.println("--------------------");
+
+		p.setX(10);
+		p.setY(20);
+		System.out.println(p);
+		System.out.println(c);
+	}
+}
+~~~
+
+h
