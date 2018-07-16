@@ -89,12 +89,12 @@ try{
   오류 발생과 상관없이 항상 실행되어야 하는 코드
 }
 ~~~
-여러 종류의 catch를 넣을 수 있음
-
+여러 종류의 catch를 넣을 수 있움<br>
+catch도 위부터 읽음
 
 ##### 에러의 종류
 
 자바에서는 예외도 객체로 처리됨. 이 예외를 만들기 위한 클래스들도 상속계층 구조 가짐<br>
-IOException - 필수적 <br>
-RuntimeException - 선택적<br>
+IOException - 필수적 예외처리<br>
+RuntimeException - 선택적 예외처리<br>
 Error - 예외처리 대상 아님
