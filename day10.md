@@ -102,3 +102,21 @@ public class TestThread {
 	}
 }
 ~~~
+
+동기화 방법 - synchronized: 한순간에 하나의 스레드만을 허용함
+~~~java
+public class BankAccount {
+	int balance;
+	public synchronized void deposit(int amount) {
+		balance += amount;
+
+	}
+	public synchronized void withdraw(int amount) {
+		balance -= amount;
+
+	}
+	public synchronized int getBalance() {
+		return balance;
+	}
+}
+~~~
