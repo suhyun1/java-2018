@@ -75,8 +75,8 @@ public class ExceptionTest {
 명령흐름이 대기해야됨에도 불구하고 동시에 다른 작업을 하고 싶을 때 스레드 사용
 
 멀티스레드 사용하는 방법<br>
-run함수를 오버라이드하거나
-Runnable<br>
+thread 상속하여 run함수를 오버라이드하거나
+Runnable 인터페이스 상속<br>
  파생스레드가 수행할 동작을 run함수에 정의하고, 스레드 객체의 start호출
 
 ~~~java
