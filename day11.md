@@ -23,7 +23,8 @@ public class Test {
 ~~~
 
 ## 컬렉션 프레임웤
-
+컬렉션은 자바에서 자료구조를 구현한 클래스<br>
+자료구조로는 리스트, 스택, 큐, 집합(set), 해쉬 테이블 등이 있다.
 - List:
  순서가 있는 데이터 모임. 각각의 데이터는 순서(인덱스)로 구분
 - Set:
@@ -34,6 +35,7 @@ public class Test {
 위의 내용 중요하다!
 
 ### List
+가변길이 배열에 쓸 수 있음
 ##### Array List
 ~~~java
 import java.util.ArrayList;
