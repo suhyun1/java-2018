@@ -1,6 +1,7 @@
 # Day14
 \\\\70.12.112.50
 ### 레코드 삽입, 수정, 삭제
+**DML 명령어: insert, upadate, delete, select**
 #### 레코드 삽입
 >insert into 테이블이름values(값, 값, ...)<br>
 
@@ -83,9 +84,10 @@ select * from  student where grade in(1,2,3);
 select * from student where weight between 40 and 60;
 ~~~
 
+***
 ####  함수
 
-집합함수(그룹함수)
+집합함수(그룹함수) - 여러 개의 데이터에 대해 하나의 값을 만들어냄
 
 -- 컬럼의 합과 평균: sum(칼럼명) , avg(칼럼명)
 ~~~sql
@@ -106,3 +108,16 @@ select sum(weight), sum(height)
   from student
   group by grade; --일반 컬럼명은 group by에 넣어줘야 함
 ~~~
+ 그룹별로 출력됨
+***
+#### JOIN
+> 두 개 이상의 테이블 들을 연결 또는 결합하여 데이터를 출력하는 것
+(primary, foreign key 관계만 )
+
+** inner join **
+~~~sql
+select ename, job, sal, d.deptno, dname, loc
+  from emp e join dept d  
+  on e.deptno = d.deptno; --일차하는 경우 출력
+~~~
+** outer join **
