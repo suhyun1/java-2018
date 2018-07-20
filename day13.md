@@ -20,7 +20,7 @@ grant create session, create table, create view,
 create sequence, create procedure
 to 계정명;
 
-<hr>
+***
 #### 테이블 생성
 
 ex) CREATE TABLE userlist(<br>
