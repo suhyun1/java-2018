@@ -114,10 +114,10 @@ select sum(weight), sum(height)
 > 두 개 이상의 테이블 들을 연결 또는 결합하여 데이터를 출력하는 것
 (primary, foreign key 관계만 )
 
-** inner join **
+**inner join**
 ~~~sql
 select ename, job, sal, d.deptno, dname, loc
   from emp e join dept d  
   on e.deptno = d.deptno; --일차하는 경우 출력
 ~~~
-** outer join **
+**outer join**
