@@ -79,9 +79,27 @@ select * from  student where grade in(1,2,3);
 ~~~sql
 select * from student where weight between 40 and 60;
 ~~~
+<hr>
 #### 함수
 
-집합함수
+집합함수(그룹함수)
+
+-- 컬럼의 합과 평균: sum(칼럼명) , avg(칼럼명)
 ~~~sql
 select sum(weight) as "몸무게의 합", avg(weight) as "몸무게의 평균" from student;
+~~~
+
+-- 최대값과 최소값 max(칼럼명) , min(칼럼명)
+~~~sql
+select max(pay), min(pay) from professor;
+~~~
+*그룹필드와 일반 필드 함께 쓸 수 없음. <br>
+함께 쓰려면 그룹화해야함 :
+**group by***
+
+ ex) 학생 테이블에서 학년 별로 몸무게와 키의 합
+~~~sql
+select sum(weight), sum(height)
+  from student
+  group by grade; --일반 컬럼명은 group by에 넣어줘야 함
 ~~~
