@@ -68,19 +68,21 @@ delete emp2 where emp_type ='계약직';
 ~~~
 
 <hr>
-#### 연산자
+####  연산자
 -- 컬럼명 in(값, 값, ...)
+
 ~~~sql
 -- 1,2,3 학년인 학생 찾기
 select * from student where grade=1 or grade=2 or grade=3;
 select * from  student where grade in(1,2,3);
 ~~~
 -- between a and b (a이상 b이하)
+
 ~~~sql
 select * from student where weight between 40 and 60;
 ~~~
 <hr>
-#### 함수
+####  함수
 
 집합함수(그룹함수)
 
