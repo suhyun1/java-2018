@@ -121,3 +121,5 @@ select ename, job, sal, d.deptno, dname, loc
   on e.deptno = d.deptno; --일차하는 경우 출력
 ~~~
 **outer join**
+
+https://www.google.co.kr/search?q=sql+join&tbm=isch&source=iu&ictx=1&fir=98zIESpVxt_SVM%253A%252CoGQPooZweFFQ5M%252C_&usg=__aF7akDH8tzFm9dcP99CICu747Vk%3D&sa=X&ved=2ahUKEwjr4MTCo63cAhUIwbwKHYdDCekQ9QEwBHoECAQQBg#imgrc=98zIESpVxt_SVM:
