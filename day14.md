@@ -67,7 +67,8 @@ select * from emp2 where emp_type ='계약직';
 delete emp2 where emp_type ='계약직';
 ~~~
 
-<hr>
+***
+
 ####  연산자
 -- 컬럼명 in(값, 값, ...)
 
@@ -81,7 +82,7 @@ select * from  student where grade in(1,2,3);
 ~~~sql
 select * from student where weight between 40 and 60;
 ~~~
-<hr>
+
 ####  함수
 
 집합함수(그룹함수)
