@@ -99,3 +99,13 @@ from student
 group by grade
 having avg(height) >=165 and avg(weight)>=60;
 ~~~
+
+#### SEQUENCE
+> - 유일한 값을 생성해주는 오라클 객체이다.
+- 시퀀스를 생성하면 기본키와 같이 순차적으로 증가하는 컬럼을 자동적으로 생성 할 수 있다.
+
+~~~sql
+CREATE SEQUENCE seq_name
+  START WITH 10 --시퀀스의 시작 값
+  INCREMENT BY 10; --시퀀스의 증가 값
+  ~~~
