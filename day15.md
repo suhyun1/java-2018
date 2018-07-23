@@ -25,7 +25,7 @@ create table c_emp2
 
 ***
 **order by**
->지정된 컬럼으로 정렬
+>해당 컬럼을 오름차순으로 정렬하여 결과를 출력한다. <br>두 개의 컬럼을 지정할 경우는 첫 컬럼별로 정렬 후, 다시 두번째 컬럼으로 정렬한다.
 
 ~~~sql
 select * from emp order by ename desc;
