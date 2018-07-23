@@ -33,6 +33,8 @@ select * from emp order by 2 desc; --필드명 대신 번호(칼럼 순서)도 �
 ~~~
 ***
 #### union
+> 2개 테이블의 레코드 합침
+
 union
 ~~~sql
 select * from emp
@@ -57,6 +59,7 @@ select * from c_emp3;
 \* cast 함수 - 데이터 형식 변환 함수
 ~~~sql
 cast(sal *1.15 as int)
+-- sal 1.15배하고 정수형으로
 ~~~
 #### subquery
 > 메인 쿼리 안에서 또 다른 쿼리문이 있는 것. 반드시 서브쿼리를 괄호로 묶는다.
