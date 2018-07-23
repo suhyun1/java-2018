@@ -25,9 +25,11 @@ create table c_emp2
 
 ***
 **order by**
+>지정된 컬럼으로 정렬
+
 ~~~sql
 select * from emp order by ename desc;
-select * from emp order by 2 desc; --필드명 대신 번호도 가능
+select * from emp order by 2 desc; --필드명 대신 번호(칼럼 순서)도 가능
 ~~~
 ***
 #### union
