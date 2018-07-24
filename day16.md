@@ -215,13 +215,6 @@ public class CloseHelper {
 - update
 
 ~~~java
-package ex03.jdbc;
-
-import java.sql.*;
-import java.util.Scanner;
-
-import dbConn.util.ConnectionHelper;
-
 public class GiftUpdate {
 	public static void main(String[] args) throws Exception{ //예외처리위임
 
@@ -255,6 +248,51 @@ public class GiftUpdate {
 
 		System.out.println(gno+" 수정이 완료되었습니다.");
 
+	}
+}
+~~~
+\* 다양한 update문 사용 예
+
+~~~java
+pstmt = conn.prepareStatement(
+"update gift set gno = ?, gname = ? where gno=?");
+
+System.out.println("\n목록에서 update할 번호");
+int num = new Scanner(System.in).nextInt();
+pstmt.setInt(3, num); //3번쨰 물음표
+
+System.out.println("gno 변경: ");
+pstmt.setInt(1, new Scanner(System.in).nextInt()); //1번째 물음표
+
+System.out.println("gname 변경:");
+pstmt.setString(2, new Scanner(System.in).next());  //2번째 물음표
+
+pstmt.executeUpdate();
+~~~
+- delete
+
+~~~java
+public class GiftDelete {
+	public static void main(String[] args) throws Exception{
+
+		Connection conn = ConnectionHelper.getConnection("oracle");
+
+
+		PreparedStatement pstmt = null;
+		// 3. dml - delete 사용
+
+		pstmt = conn.prepareStatement("delete gift where gname = ?");
+
+		System.out.println("변경할 상품명: ");
+		String name = new Scanner(System.in).next();
+		pstmt.setString(1, name);
+
+		int result  = pstmt.executeUpdate();
+
+		System.out.println(result+" 제거되었습니다");
+
+		CloseHelper.close(conn);
+		CloseHelper.close(pstmt);
 	}
 }
 ~~~
