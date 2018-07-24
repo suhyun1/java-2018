@@ -6,7 +6,8 @@
 ~~~
 Class.forName("oracle.jdbc.driver.OracleDriver");
 ~~~
-C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib\ojdbc6.jar  
+C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib\ojdbc6.jar 을 jar lib에 넣어줌  
+
 2.연결
 ~~~
 Connection conn = DriverManager.getConnection(url, user, pw);
@@ -88,11 +89,15 @@ public class GiftInsert {
 		Statement stmt = conn.createStatement();
 
 		// insert into gift values(11,'아이패드',1000,100000); 이 문장 수행하려면
+        //방법1
 		// String sql = "insert into gift values("+11+",'"+"아이패드"+"',"+1000+","+100000+")";
 		// sql문 문자열 취급
 
-        //여러 값을 넣을 때 메인에 입력해주는 방법도 있음 (run as configuration 에서 실행)
-		String sql = "insert into gift values(" + args[0] + ",'" + args[1] + "'," + args[2] + "," + args[3] + ")";
+        //방법2. 여러 값을 넣을 때 메인에 입력해주는 방법도 있음 (run as configuration 에서 실행)
+		//String sql = "insert into gift values(" + args[0] + ",'" + args[1] + "'," + args[2] + "," + args[3] + ")";
+
+        //방법3.
+        String sql = "insert into gift values(" + scan.nextInt() + ",'" + scan.next() + "'," + scan.nextInt() + "," + scan.nextInt() + ")";
 
 		System.out.println(sql.toString());
 		int result = stmt.executeUpdate(sql); // 실제 명령 실행
@@ -102,5 +107,154 @@ public class GiftInsert {
 }
 
 ~~~
+***
+\* 반복적인 문장 구현하지 않도록 클래스를 만들자
 
--
+connection 관련 클래스
+~~~java
+package dbConn.util;
+
+import java.sql.*;
+//반복적인 것 구현하지 않도록
+public class ConnectionHelper {
+
+	public static Connection getConnection(String dsn) {
+		Connection conn = null;
+
+		try {
+			if(dsn.equals("mysql")) {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampleDB",
+						"suhyun", "oracle");
+			}else if(dsn.equals("oracle")) {
+				Class.forName("oracle.jdbc.OracleDriver");
+				conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE",
+						"suhyun", "oracle");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			return conn;
+		}
+
+	}
+
+	public static Connection getConnection(String dsn, String userid, String pwd) {
+		Connection conn = null;
+
+		try {
+			if(dsn.equals("mysql")) {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sampleDB",
+						userid, pwd);
+			}else if(dsn.equals("oracle")) {
+				Class.forName("oracle.jdbc.OracleDriver");
+				conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE",
+						userid, pwd);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			return conn;
+		}
+	}
+
+}
+~~~
+close 관련 클래스
+~~~java
+package dbConn.util;
+
+import java.sql.*;
+
+public class CloseHelper {
+
+	public static void close(Connection conn) {
+		if(conn!=null)
+			try {
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+	}
+	public static void close(Statement stmt ) {
+		if(stmt!=null)
+			try {
+				stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+	}
+
+	public static void close(ResultSet rs) {
+		if(rs!=null)
+			try {
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+	}
+	public static void close(PreparedStatement pstmt) {
+		if(pstmt!=null)
+			try {
+				pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
+}
+~~~
+***
+- update
+
+~~~java
+package ex03.jdbc;
+
+import java.sql.*;
+import java.util.Scanner;
+
+import dbConn.util.ConnectionHelper;
+
+public class GiftUpdate {
+	public static void main(String[] args) throws Exception{ //예외처리위임
+
+		Connection conn = ConnectionHelper.getConnection("oracle");
+		//3. dml - update 사용
+		Statement stmt = conn.createStatement();
+		PreparedStatement pstmt = null;
+		ResultSet rs = stmt.executeQuery("SELECT * FROM GIFT");
+
+		System.out.println("상품번호\t상품명\t최저가\t최고가");
+		while(rs.next()) {		//다음칸으로 내림
+			int gno = rs.getInt(1);
+			String name = rs.getString("gname"); //2
+			int g_s = rs.getInt("g_start");
+			int g_e = rs.getInt("g_end");
+
+			System.out.println(gno+"\t"+name+"\t"+g_s+"\t"+g_e);
+		}
+
+		//레코드 업데이트
+		System.out.println("\n목록에서 update할 번호");
+		int num = new Scanner(System.in).nextInt();
+
+		System.out.println("gno를 몇번으로 바꾸시겠습니까");
+		int gno = new Scanner(System.in).nextInt();
+
+		pstmt = conn.prepareStatement("update gift set gno = ? where gno="+num);
+
+		pstmt.setInt(1, gno);
+		pstmt.executeUpdate();
+
+		System.out.println(gno+" 수정이 완료되었습니다.");
+
+	}
+}
+~~~
