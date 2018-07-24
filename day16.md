@@ -1,22 +1,28 @@
 # Day16
-### JDBC
+## JDBC
 
 #### JDBC 연결하기
-1.드라이브 로드
+1.드라이브 로드<br>
+ex) 오라클 드라이버 로딩
 ~~~
 Class.forName("oracle.jdbc.driver.OracleDriver");
 ~~~
+\* 클래스 패스 방법
 C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib\ojdbc6.jar 을 jar lib에 넣어줌  
 
 2.연결
+>데이터베이스와 연결된 커넥션을 구함
+
 ~~~
 Connection conn = DriverManager.getConnection(url, user, pw);
 //연결객체
 ~~~
+oracle의 url: "jdbc:oracle:thin:@127.0.0.1:1521:XE"
+
 3.sql명령어 사용
 ~~~
 statement stat = conn.createStatement("select * from gift");
-result rs = connn. stat.executeQuery(); //반환 값이 있는 경우
+ResultSet rs = conn. stat.executeQuery(); //반환 값이 있는 경우
 
 stat.executeUpdate(sql); //반환 값이 없는 경우(select문 제외한 dml 명령어)
 ~~~
@@ -277,7 +283,6 @@ public class GiftDelete {
 
 		Connection conn = ConnectionHelper.getConnection("oracle");
 
-
 		PreparedStatement pstmt = null;
 		// 3. dml - delete 사용
 
@@ -296,3 +301,7 @@ public class GiftDelete {
 	}
 }
 ~~~
+
+\* prepareStatement
+>사용자 입력 값으로 쿼리실행 할때 사용함<br>
+하나의 객체로 여러번의 쿼리를 실행할 수 있음
