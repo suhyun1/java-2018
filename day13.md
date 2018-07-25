@@ -27,3 +27,16 @@ ex) CREATE TABLE userlist(<br>
 id VARCHAR2(10) CONSTRAINT id_pk PRIMARY key, <br>
 name varchar2(10) not null <br>
 )
+***
+*권한 받기*
+
+~~~SQL
+alter user suhyun account unlock;
+
+grant create session, create table, create view, create sequence, create procedure
+to suhyun;
+
+GRANT UNLIMITED TABLESPACE TO suhyun;
+
+select * from tab; --확인
+~~~
